@@ -1,0 +1,10 @@
+.DS_Store
+
+bin/
+gen/
+*.class
+META-INF/
+*.swp
+
+# don't accidentally upload my own input files
+input.txt
