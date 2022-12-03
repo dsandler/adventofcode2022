@@ -58,23 +58,27 @@ fun String.toResult(): Result {
 }
 
 fun scoreRound(me: Shape, them: Shape): Int {
-    if (me == them) return Result.DRAW.score()
-    else if (me == them.beater()) return Result.WIN.score()
-    else return Result.LOSS.score()
+    if (me == them) {
+        return Result.DRAW.score()
+    } else if (me == them.beater()) {
+        return Result.WIN.score()
+    } else {
+        return Result.LOSS.score()
+    }
 }
 
 fun score(lines: Sequence<String>): Int {
     var score = 0
     lines.forEach { line ->
-        log(">> ${line}")
-        val theirShape = line.substring(0,1).toShape()
-        val result = line.substring(2,3).toResult()
-        val myShape = when(result) {
+        log(">> $line")
+        val theirShape = line.substring(0, 1).toShape()
+        val result = line.substring(2, 3).toResult()
+        val myShape = when (result) {
             Result.DRAW -> theirShape
             Result.WIN -> theirShape.beater()
             Result.LOSS -> theirShape.beats()
         }
-        log("   ${theirShape} (them) vs ${myShape} (me)")
+        log("   $theirShape (them) vs $myShape (me)")
         log("   SHAPE SCORE: ${myShape.score()}")
         log("   ROUND SCORE: ${scoreRound(myShape, theirShape)}")
         score += myShape.score() + scoreRound(myShape, theirShape)

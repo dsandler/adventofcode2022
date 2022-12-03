@@ -1,7 +1,7 @@
 // https://adventofcode.com/2022/day/1
 
 fun log(s: String) {
-    //println(s)
+    // println(s)
 }
 
 fun inputLines(): Sequence<String> = sequence {
@@ -38,7 +38,7 @@ val SCORE_WIN = 6
 
 fun scoreRound(me: Shape, them: Shape): Int {
     if (me == them) return SCORE_DRAW
-    return when(me) {
+    return when (me) {
         Shape.ROCK -> if (them == Shape.SCISSORS) SCORE_WIN else SCORE_LOSS
         Shape.PAPER -> if (them == Shape.ROCK) SCORE_WIN else SCORE_LOSS
         Shape.SCISSORS -> if (them == Shape.PAPER) SCORE_WIN else SCORE_LOSS
@@ -48,10 +48,10 @@ fun scoreRound(me: Shape, them: Shape): Int {
 fun score(lines: Sequence<String>): Int {
     var score = 0
     lines.forEach { line ->
-        log(">> ${line}")
-        val theirShape = line.substring(0,1).toShape()
-        val myShape = line.substring(2,3).toShape()
-        log("   ${theirShape} (them) vs ${myShape} (me)")
+        log(">> $line")
+        val theirShape = line.substring(0, 1).toShape()
+        val myShape = line.substring(2, 3).toShape()
+        log("   $theirShape (them) vs $myShape (me)")
         log("   SHAPE SCORE: ${myShape.score()}")
         log("   ROUND SCORE: ${scoreRound(myShape, theirShape)}")
         score += myShape.score() + scoreRound(myShape, theirShape)
